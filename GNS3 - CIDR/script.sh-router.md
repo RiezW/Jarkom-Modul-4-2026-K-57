@@ -5,7 +5,7 @@
 
 # Enable IP forwarding
 sysctl -w net.ipv4.ip_forward=1
-
+k
 # Interface IP configuration
 # eth0 terhubung ke NAT1 (DHCP / automatic dari NAT)
 dhclient eth0 2>/dev/null || true
