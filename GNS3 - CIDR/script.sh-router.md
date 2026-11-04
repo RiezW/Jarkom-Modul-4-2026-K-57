@@ -23,6 +23,12 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip route add 10.92.0.0/17 via 10.92.0.130 dev eth2 2>/dev/null || true
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 2. Router Wired
 
 ```bash
@@ -58,6 +64,12 @@ ip route add 10.92.16.0/20 via 10.92.0.139
 ip route add 10.92.32.0/19 via 10.92.0.140
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 3. Router Cabang Kiri (Switch 2)
 
 ### 3.1. Router Psyche
@@ -75,6 +87,12 @@ ip addr add 10.92.4.1/22 dev eth1
 
 # Default route ke Wired
 ip route add default via 10.92.0.137
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ### 3.2. Router Copland
@@ -95,6 +113,12 @@ ip addr add 10.92.18.1/23 dev eth2
 
 # Default route ke Wired
 ip route add default via 10.92.0.137
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ### 3.3. Router Schumann
@@ -120,6 +144,12 @@ ip route add default via 10.92.0.137
 ip route add 10.92.32.0/22 via 10.92.20.10
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ### 3.4. Router Aceta
 
 ```bash
@@ -135,6 +165,12 @@ ip addr add 10.92.32.1/22 dev eth1
 
 # Default route ke Schumann
 ip route add default via 10.92.20.9
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 4. Router Cabang Kanan (Navi)
@@ -158,6 +194,12 @@ ip addr add 10.92.50.1/24 dev eth3
 
 # Default route ke Wired
 ip route add default via 10.92.36.1
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 5. Router Cabang Bawah (Tachibana–Shibuya)
@@ -185,6 +227,12 @@ ip route add default via 10.92.51.1
 ip route add 10.92.64.0/20 via 10.92.54.2
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ### 5.2. Router Deus
 
 ```bash
@@ -209,6 +257,12 @@ ip route add 10.92.65.0/24 via 10.92.64.130
 ip route add 10.92.66.0/23 via 10.92.64.130
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ### 5.3. Router Protocol7
 
 ```bash
@@ -230,6 +284,12 @@ ip route add default via 10.92.64.129
 
 # Static route ke Knights dan seterusnya
 ip route add 10.92.66.0/23 via 10.92.65.66
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ### 5.4. Router Knights
@@ -256,6 +316,12 @@ ip route add 10.92.66.16/28 via 10.92.66.6
 ip route add 10.92.66.32/27 via 10.92.66.6
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ### 5.5. Router Phantoma
 
 ```bash
@@ -279,6 +345,12 @@ ip route add default via 10.92.66.5
 ip route add 10.92.68.0/26 via 10.92.66.34
 ```
 
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ### 5.6. Router Shibuya
 
 ```bash
@@ -294,4 +366,10 @@ ip addr add 10.92.68.1/26 dev eth1
 
 # Default route ke Phantoma
 ip route add default via 10.92.66.33
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```

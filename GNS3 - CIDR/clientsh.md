@@ -19,6 +19,12 @@ ip addr add 10.92.0.3/25 dev eth0
 ip route add default via 10.92.0.1
 ```
 
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 2. Subnet A4 (Switch 3)
 Gateway: `10.92.4.1`
 
@@ -34,6 +40,12 @@ ip route add default via 10.92.4.1
 #!/bin/bash
 ip addr add 10.92.4.3/22 dev eth0
 ip route add default via 10.92.4.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 3. Subnet A5 & A6 (Copland)
@@ -53,6 +65,12 @@ ip addr add 10.92.18.2/23 dev eth0
 ip route add default via 10.92.18.1
 ```
 
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 4. Subnet A7 (Schumann)
 Gateway: `10.92.20.1`
 
@@ -61,6 +79,12 @@ Gateway: `10.92.20.1`
 #!/bin/bash
 ip addr add 10.92.20.2/29 dev eth0
 ip route add default via 10.92.20.1
+```
+
+Eksekusi pada node ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 5. Subnet A9 (Switch 5 / Aceta)
@@ -78,6 +102,12 @@ ip route add default via 10.92.32.1
 #!/bin/bash
 ip addr add 10.92.32.3/22 dev eth0
 ip route add default via 10.92.32.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 6. Subnet A11, A12, A13 (Navi)
@@ -125,6 +155,12 @@ ip addr add 10.92.50.4/24 dev eth0
 ip route add default via 10.92.50.1
 ```
 
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 7. Subnet A15 (Switch 9 / Tachibana)
 Gateway: `10.92.52.1`
 
@@ -140,6 +176,12 @@ ip route add default via 10.92.52.1
 #!/bin/bash
 ip addr add 10.92.52.3/23 dev eth0
 ip route add default via 10.92.52.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 8. Subnet A17 (Switch 10 / Deus)
@@ -159,6 +201,12 @@ ip addr add 10.92.64.3/25 dev eth0
 ip route add default via 10.92.64.1
 ```
 
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 9. Subnet A19 (Switch 11 / Protocol7)
 Gateway: `10.92.65.1`
 
@@ -176,6 +224,12 @@ ip addr add 10.92.65.3/26 dev eth0
 ip route add default via 10.92.65.1
 ```
 
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 10. Subnet A21 (Knights)
 Gateway: `10.92.66.1`
 
@@ -186,6 +240,12 @@ ip addr add 10.92.66.2/30 dev eth0
 ip route add default via 10.92.66.1
 ```
 
+Eksekusi pada node ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 11. Subnet A23 (Switch 13 / Phantoma)
 Gateway: `10.92.66.17`
 
@@ -194,6 +254,12 @@ Gateway: `10.92.66.17`
 #!/bin/bash
 ip addr add 10.92.66.18/28 dev eth0
 ip route add default via 10.92.66.17
+```
+
+Eksekusi pada node ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
 ```
 
 ## 12. Subnet A25 (Switch 12 / Shibuya)
@@ -213,12 +279,8 @@ ip addr add 10.92.68.3/26 dev eth0
 ip route add default via 10.92.68.1
 ```
 
-## Petunjuk eksekusi di GNS3
-Simpan setiap skrip sebagai berkas `/root/script.sh` pada masing-masing node Debian, lalu jalankan perintah berikut:
-
+Eksekusi pada setiap node di subnet ini:
 ```bash
 chmod +x /root/script.sh
-```
-```bash
 bash /root/script.sh
 ```
