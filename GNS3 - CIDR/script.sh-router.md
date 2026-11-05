@@ -1009,6 +1009,20 @@ ip -br addr
 ip route
 ```
 
+revisi ke 2
+```bash
+ip addr flush dev eth1
+ip addr flush dev eth2
+
+# eth1 -> Shibuya (A24)
+ip addr replace 10.92.16.97/30 dev eth1
+
+# eth2 -> Switch 13 (A23)
+ip addr replace 10.92.16.65/27 dev eth2
+
+ip route replace 10.92.16.0/26 via 10.92.16.98
+```
+
 ### 5.6. Router Shibuya
 
 ```bash

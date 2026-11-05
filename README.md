@@ -17,22 +17,6 @@ Laporan ini membagi dokumentasi menjadi dua bagian: **1. CIDR** untuk pengerjaan
 
 ![Topologi jaringan](Assets/GNS3/topologi_lingkaran.png)
 
-![Topologi level B](Assets/GNS3/level-B.png)
-
-![Topologi level C](Assets/GNS3/level-C.png)
-
-![Topologi level D](Assets/GNS3/level-D.png)
-
-![Topologi level E](Assets/GNS3/level-E.png)
-
-![Topologi level F](Assets/GNS3/level-F.png)
-
-![Topologi level G](Assets/GNS3/level-G.png)
-
-![Topologi level H](Assets/GNS3/level-H.png)
-
-![Topologi level I](Assets/GNS3/level-I.png)
-
 ## 1. CIDR
 
 ### 1.1 Berkas Dokumentasi
@@ -84,6 +68,55 @@ Topologi terdiri dari Cyberia sebagai router yang mengarah ke NAT, Wired sebagai
 ### 1.3 Perhitungan CIDR dan Routing
 
 Prefix dipilih berdasarkan kebutuhan host pada tiap subnet. Untuk subnet LAN, jumlah alamat usable harus mencukupi host dan interface router; untuk link point-to-point digunakan subnet kecil seperti `/30`. Setelah subnet individual ditentukan, jaringan cabang diringkas menggunakan prefix bersama agar router inti tidak perlu menyimpan satu route untuk setiap LAN.
+
+![Pohon subnetting](Assets/GNS3/pohon%20subnetting.png)
+
+Tabel berikut merangkum prefix dari setiap tahap penggabungan. Diagram level B-I di bawah memetakan hasil penggabungan tersebut ke topologi jaringan.
+
+| Level | Hasil penggabungan | Network/prefix | Gabungan dari |
+|---|---|---|---|
+| B | B1 | `10.92.16.64/26` | A23 + A24 |
+| B | B2 | `10.92.16.128/28` | A21 + A22 |
+| B | B3 | `10.92.17.0/25` | A19 + A20 |
+| B | B4 | `10.92.18.128/29` | A16 + A18 |
+| B | B5 | `10.92.24.0/23` | A11 + A13 |
+| B | B6 | `10.92.4.0/28` | A7 + A8 |
+| B | B7 | `10.92.12.0/22` | A6 + A5 |
+| B | B8 | `10.92.28.136/29` | A10 + A14 |
+| C | C1 | `10.92.16.0/25` | A25 + B1 |
+| C | C2 | `10.92.18.0/24` | A17 + B4 |
+| C | C3 | `10.92.28.128/28` | A3 + B8 |
+| C | C4 | `10.92.0.0/21` | A9 + B6 |
+| C | C5 | `10.92.8.0/21` | A4 + B7 |
+| C | C6 | `10.92.24.0/22` | B5 + A12 |
+| D | D1 | `10.92.16.0/24` | C1 + B2 |
+| D | D2 | `10.92.28.128/27` | C3 + A2 |
+| D | D3 | `10.92.0.0/20` | C4 + C5 |
+| E | E1 | `10.92.16.0/23` | D1 + B3 |
+| E | E2 | `10.92.28.0/24` | A1 + D2 |
+| F | F1 | `10.92.16.0/22` | E1 + C2 |
+| F | F2 | `10.92.24.0/21` | C6 + E2 |
+| G | G1 | `10.92.16.0/21` | F1 + A15 |
+| H | H1 | `10.92.16.0/20` | G1 + F2 |
+| I | I1 (ROOT) | `10.92.0.0/19` | D3 + H1 |
+
+#### Visualisasi penggabungan pada topologi
+
+![Topologi hasil penggabungan level B](Assets/GNS3/level-B.png)
+
+![Topologi hasil penggabungan level C](Assets/GNS3/level-C.png)
+
+![Topologi hasil penggabungan level D](Assets/GNS3/level-D.png)
+
+![Topologi hasil penggabungan level E](Assets/GNS3/level-E.png)
+
+![Topologi hasil penggabungan level F](Assets/GNS3/level-F.png)
+
+![Topologi hasil penggabungan level G](Assets/GNS3/level-G.png)
+
+![Topologi hasil penggabungan level H](Assets/GNS3/level-H.png)
+
+![Topologi hasil penggabungan level I](Assets/GNS3/level-I.png)
 
 ![Pengelompokan subnet CIDR](Assets/GNS3/penggabungancidr1.png)
 
