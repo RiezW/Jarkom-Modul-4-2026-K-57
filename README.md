@@ -119,13 +119,32 @@ Script dan alamat lengkap per node tersedia pada [konfigurasi router](<GNS3 - CI
 
 ### 1.5 Pengujian
 
-Pengujian dasar menggunakan `ip -br addr`, `ip route`, serta `ping -c 4 <alamat-tujuan>`. Alokasi IP baru perlu diuji ulang; screenshot ping yang tersedia berasal dari skema alamat sebelumnya dan belum memverifikasi konfigurasi terbaru. Checklist di [`GNS3 - CIDR/cara test.md`](<GNS3 - CIDR/cara test.md>) juga masih memakai alamat lama dan perlu diperbarui sebelum pengujian.
+Pengujian menggunakan `ip -br addr`, `ip route`, dan `ping -c 4 <alamat-tujuan>`. Screenshot terbaru menunjukkan empat ping berhasil tanpa packet loss:
 
-### 1.6 Catatan Sebelum Demo
+| Sumber | Tujuan | Hasil |
+|---|---|---|
+| JJ | MyuMyu (`10.92.28.3`) | 4 paket diterima, 0% packet loss |
+| Karl | JJ (`10.92.28.2`) | 4 paket diterima, 0% packet loss |
+| Schumann | Aceta (`10.92.4.10`) | 4 paket diterima, 0% packet loss |
+| Wired | Cyberia (`10.92.28.145`) | 4 paket diterima, 0% packet loss |
 
-- Script pada [`GNS3 - CIDR/script.sh-router.md`](<GNS3 - CIDR/script.sh-router.md>), [`GNS3 - CIDR/clientsh.md`](<GNS3 - CIDR/clientsh.md>), dan [`GNS3 - CIDR/cara test.md`](<GNS3 - CIDR/cara test.md>) belum diselaraskan dengan alokasi IP dan ringkasan CIDR terbaru.
+![Ping JJ ke MyuMyu](Assets/GNS3/jj-myumyu.png)
 
-### 1.7 Kesimpulan
+![Ping Karl ke JJ](Assets/GNS3/karl-jj.png)
+
+![Ping Schumann ke Aceta](Assets/GNS3/schumann-aceta.png)
+
+![Ping Wired ke Cyberia](Assets/GNS3/wired-cyberia.png)
+
+Screenshot pemeriksaan route Wired memperlihatkan alamat interface dan route ringkasan, sedangkan pemeriksaan Shibuya memperlihatkan alamat interface serta default route:
+
+![Alamat dan route Wired](Assets/GNS3/wired.png)
+
+![Alamat dan route Shibuya](Assets/GNS3/shibuya.png)
+
+Bukti ini mengonfirmasi koneksi yang diuji dan konfigurasi pada Wired serta Shibuya, tetapi belum mencakup pengujian semua node. Checklist di [`GNS3 - CIDR/cara test.md`](<GNS3 - CIDR/cara test.md>) masih memakai alamat lama dan perlu diperbarui sebelum pengujian lanjutan.
+
+### 1.6 Kesimpulan
 
 Perancangan GNS3 membagi prefix `10.92.0.0/19` menjadi 25 subnet dengan ukuran sesuai jumlah host dan kebutuhan link ant-router. Static route dan route summarization direncanakan untuk menghubungkan cabang melalui Wired, sementara Cyberia menyediakan koneksi ke NAT. Sebelum konfigurasi atau pengujian, selaraskan script dan checklist dengan skema terbaru.
 
