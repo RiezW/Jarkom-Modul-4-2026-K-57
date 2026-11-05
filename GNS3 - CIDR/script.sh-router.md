@@ -32,6 +32,56 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+iptables -t nat -F POSTROUTING
+
+
+# eth0 -> NAT1
+dhclient eth0 2>/dev/null || true
+
+# eth1 -> Switch 1 (A1)
+ip addr replace 10.92.28.1/25 dev eth1
+
+# eth2 -> Wired (A2)
+ip addr replace 10.92.28.145/30 dev eth2
+
+# NAT masquerade
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+# Seluruh jaringan internal (I1)
+ip route replace 10.92.0.0/19 via 10.92.28.146 dev eth2
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ## 2. Router Wired
 
 ```bash
@@ -89,6 +139,70 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Cyberia (A2)
+ip addr replace 10.92.28.146/30 dev eth0
+
+# eth1 -> Switch 2 (A3)
+ip addr replace 10.92.28.129/29 dev eth1
+
+# eth2 -> Navi (A10)
+ip addr replace 10.92.28.137/30 dev eth2
+
+# eth3 -> Tachibana (A14)
+ip addr replace 10.92.28.141/30 dev eth3
+
+# Default route ke Cyberia
+ip route replace default via 10.92.28.145
+
+# Schumann + Aceta (C4)
+ip route replace 10.92.0.0/21 via 10.92.28.132
+
+# Psyche (A4)
+ip route replace 10.92.8.0/22 via 10.92.28.130
+
+# Copland (B7)
+ip route replace 10.92.12.0/22 via 10.92.28.131
+
+# Tachibana dan seluruh cabang bawah (G1)
+ip route replace 10.92.16.0/21 via 10.92.28.142
+
+# Navi (C6)
+ip route replace 10.92.24.0/22 via 10.92.28.138
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ## 3. Router Cabang Kiri (Switch 2)
 
 ### 3.1. Router Psyche
@@ -116,6 +230,49 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Switch 2 (A3)
+ip addr replace 10.92.28.130/29 dev eth0
+
+# eth1 -> Switch 3 (A4)
+ip addr replace 10.92.8.1/22 dev eth1
+
+# Default route ke Wired
+ip route replace default via 10.92.28.129
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```
 
 ### 3.2. Router Copland
@@ -146,6 +303,52 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Switch 2 (A3)
+ip addr replace 10.92.28.131/29 dev eth0
+
+# eth1 -> Juri (A5)
+ip addr replace 10.92.14.1/26 dev eth1
+
+# eth2 -> Switch 4 (A6)
+ip addr replace 10.92.12.1/23 dev eth2
+
+# Default route ke Wired
+ip route replace default via 10.92.28.129
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```
 
 ### 3.3. Router Schumann
@@ -181,6 +384,55 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Switch 2 (A3)
+ip addr replace 10.92.28.132/29 dev eth0
+
+# eth1 -> Akashic (A7)
+ip addr replace 10.92.4.1/29 dev eth1
+
+# eth2 -> Aceta (A8)
+ip addr replace 10.92.4.9/30 dev eth2
+
+# Default route ke Wired
+ip route replace default via 10.92.28.129
+
+# LAN Aceta (A9)
+ip route replace 10.92.0.0/22 via 10.92.4.10
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ### 3.4. Router Aceta
 
 ```bash
@@ -206,6 +458,49 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Schumann (A8)
+ip addr replace 10.92.4.10/30 dev eth0
+
+# eth1 -> Switch 5 (A9)
+ip addr replace 10.92.0.1/22 dev eth1
+
+# Default route ke Schumann
+ip route replace default via 10.92.4.9
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```
 
 ## 4. Router Cabang Kanan (Navi)
@@ -241,6 +536,55 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Wired (A10)
+ip addr replace 10.92.28.138/30 dev eth0
+
+# eth1 -> Switch 6 (A11)
+ip addr replace 10.92.24.1/24 dev eth1
+
+# eth2 -> Switch 7 (A12)
+ip addr replace 10.92.26.1/26 dev eth2
+
+# eth3 -> Switch 8 (A13)
+ip addr replace 10.92.25.1/24 dev eth3
+
+# Default route ke Wired
+ip route replace default via 10.92.28.137
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ## 5. Router Cabang Bawah (Tachibana–Shibuya)
 
 ### 5.1. Router Tachibana
@@ -274,6 +618,55 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Wired (A14)
+ip addr replace 10.92.28.142/30 dev eth0
+
+# eth1 -> Switch 9 (A15)
+ip addr replace 10.92.20.1/23 dev eth1
+
+# eth2 -> Deus (A16)
+ip addr replace 10.92.18.129/30 dev eth2
+
+# Default route ke Wired
+ip route replace default via 10.92.28.141
+
+# Deus dan seluruh cabang bawah (F1)
+ip route replace 10.92.16.0/22 via 10.92.18.130
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```
 
 ### 5.2. Router Deus
@@ -315,6 +708,55 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Tachibana (A16)
+ip addr replace 10.92.18.130/30 dev eth0
+
+# eth1 -> Switch 10 (A17)
+ip addr replace 10.92.18.1/25 dev eth1
+
+# eth2 -> Protocol7 (A18)
+ip addr replace 10.92.18.133/30 dev eth2
+
+# Default route ke Tachibana
+ip route replace default via 10.92.18.129
+
+# Protocol7 dan seluruh cabang bawah (E1)
+ip route replace 10.92.16.0/23 via 10.92.18.134
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ### 5.3. Router Protocol7
 
 ```bash
@@ -349,6 +791,55 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Deus (A18)
+ip addr replace 10.92.18.134/30 dev eth0
+
+# eth1 -> Switch 11 (A19)
+ip addr replace 10.92.17.1/26 dev eth1
+
+# eth2 -> Knights (A20)
+ip addr replace 10.92.17.65/30 dev eth2
+
+# Default route ke Deus
+ip route replace default via 10.92.18.133
+
+# Knights dan seluruh cabang bawah (D1)
+ip route replace 10.92.16.0/24 via 10.92.17.66
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```
 
 ### 5.4. Router Knights
@@ -387,6 +878,55 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Protocol7 (A20)
+ip addr replace 10.92.17.66/30 dev eth0
+
+# eth1 -> Eri (A21)
+ip addr replace 10.92.16.129/29 dev eth1
+
+# eth2 -> Phantoma (A22)
+ip addr replace 10.92.16.137/30 dev eth2
+
+# Default route ke Protocol7
+ip route replace default via 10.92.17.65
+
+# Phantoma dan seluruh cabang bawah (C1)
+ip route replace 10.92.16.0/25 via 10.92.16.138
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ### 5.5. Router Phantoma
 
 ```bash
@@ -420,6 +960,55 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Knights (A22)
+ip addr replace 10.92.16.138/30 dev eth0
+
+# eth1 -> Switch 13 (A23)
+ip addr replace 10.92.16.65/27 dev eth1
+
+# eth2 -> Shibuya (A24)
+ip addr replace 10.92.16.97/30 dev eth2
+
+# Default route ke Knights
+ip route replace default via 10.92.16.137
+
+# LAN Shibuya (A25)
+ip route replace 10.92.16.0/26 via 10.92.16.98
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
+```
+
 ### 5.6. Router Shibuya
 
 ```bash
@@ -445,4 +1034,47 @@ Eksekusi pada router ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Jalankan blok di bawah ini **sebagai pengganti** script di atas.
+> Baris `flush` wajib ada: alamat skema lama berbeda prefix dari yang baru,
+> sehingga `ip addr replace` saja tidak akan menghapusnya.
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+
+sysctl -w net.ipv4.ip_forward=1
+
+# Hapus alamat & rute skema lama
+for i in $(ls /sys/class/net | grep -v lo); do ip addr flush dev $i; done
+ip route flush table main 2>/dev/null
+
+
+# eth0 -> Phantoma (A24)
+ip addr replace 10.92.16.98/30 dev eth0
+
+# eth1 -> Switch 12 (A25)
+ip addr replace 10.92.16.1/26 dev eth1
+
+# Default route ke Phantoma
+ip route replace default via 10.92.16.97
+```
+
+Eksekusi pada router ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+Verifikasi:
+```bash
+ip -br addr
+ip route
 ```

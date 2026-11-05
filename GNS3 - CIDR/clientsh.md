@@ -33,6 +33,49 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.28.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: JJ
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.28.2/25 dev eth0
+ip route replace default via 10.92.28.1
+```
+
+#### Node: MyuMyu
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.28.3/25 dev eth0
+ip route replace default via 10.92.28.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 2. Subnet A4 (Switch 3)
 Gateway: `10.92.4.1`
 
@@ -56,6 +99,49 @@ nano /root/script.sh
 #!/bin/bash
 ip addr add 10.92.12.3/22 dev eth0
 ip route add default via 10.92.12.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.8.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Karl
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.8.2/22 dev eth0
+ip route replace default via 10.92.8.1
+```
+
+#### Node: Lin
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.8.3/22 dev eth0
+ip route replace default via 10.92.8.1
 ```
 
 Eksekusi pada setiap node di subnet ini:
@@ -95,6 +181,47 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Juri (A5)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.14.2/26 dev eth0
+ip route replace default via 10.92.14.1
+```
+
+#### Node: Masayuki (A6)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.12.2/23 dev eth0
+ip route replace default via 10.92.12.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 4. Subnet A7 (Schumann)
 Gateway: `10.92.20.1`
 
@@ -110,6 +237,35 @@ ip route add default via 10.92.20.1
 ```
 
 Eksekusi pada node ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.4.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Akashic
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.4.2/29 dev eth0
+ip route replace default via 10.92.4.1
+```
+
+Eksekusi pada setiap node di subnet ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
@@ -138,6 +294,49 @@ nano /root/script.sh
 #!/bin/bash
 ip addr add 10.92.32.3/22 dev eth0
 ip route add default via 10.92.32.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.0.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Omnipresence
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.0.2/22 dev eth0
+ip route replace default via 10.92.0.1
+```
+
+#### Node: Denpa
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.0.3/22 dev eth0
+ip route replace default via 10.92.0.1
 ```
 
 Eksekusi pada setiap node di subnet ini:
@@ -221,6 +420,103 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Alice (A11)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.24.2/24 dev eth0
+ip route replace default via 10.92.24.1
+```
+
+#### Node: Reika (A11)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.24.3/24 dev eth0
+ip route replace default via 10.92.24.1
+```
+
+#### Node: Taro (A12)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.26.2/26 dev eth0
+ip route replace default via 10.92.26.1
+```
+
+#### Node: Yasuo (A13)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.25.2/24 dev eth0
+ip route replace default via 10.92.25.1
+```
+
+#### Node: Miho (A13)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.25.3/24 dev eth0
+ip route replace default via 10.92.25.1
+```
+
+#### Node: Kuma (A13)
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.25.4/24 dev eth0
+ip route replace default via 10.92.25.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 7. Subnet A15 (Switch 9 / Tachibana)
 Gateway: `10.92.52.1`
 
@@ -244,6 +540,49 @@ nano /root/script.sh
 #!/bin/bash
 ip addr add 10.92.56.3/23 dev eth0
 ip route add default via 10.92.56.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.20.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Collective
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.20.2/23 dev eth0
+ip route replace default via 10.92.20.1
+```
+
+#### Node: Ghost
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.20.3/23 dev eth0
+ip route replace default via 10.92.20.1
 ```
 
 Eksekusi pada setiap node di subnet ini:
@@ -283,6 +622,49 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.18.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Lilith
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.18.2/25 dev eth0
+ip route replace default via 10.92.18.1
+```
+
+#### Node: Specter
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.18.3/25 dev eth0
+ip route replace default via 10.92.18.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 9. Subnet A19 (Switch 11 / Protocol7)
 Gateway: `10.92.65.1`
 
@@ -314,6 +696,49 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.17.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Chisa
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.17.2/26 dev eth0
+ip route replace default via 10.92.17.1
+```
+
+#### Node: Hodgeson
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.17.3/26 dev eth0
+ip route replace default via 10.92.17.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 10. Subnet A21 (Knights)
 Gateway: `10.92.66.1`
 
@@ -334,6 +759,35 @@ chmod +x /root/script.sh
 bash /root/script.sh
 ```
 
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.16.129`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Eri
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.16.130/29 dev eth0
+ip route replace default via 10.92.16.129
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
 ## 11. Subnet A23 (Switch 13 / Phantoma)
 Gateway: `10.92.66.17`
 
@@ -349,6 +803,35 @@ ip route add default via 10.92.72.65
 ```
 
 Eksekusi pada node ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.16.65`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Semi
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.16.66/27 dev eth0
+ip route replace default via 10.92.16.65
+```
+
+Eksekusi pada setiap node di subnet ini:
 ```bash
 chmod +x /root/script.sh
 bash /root/script.sh
@@ -377,6 +860,48 @@ nano /root/script.sh
 #!/bin/bash
 ip addr add 10.92.80.3/26 dev eth0
 ip route add default via 10.92.80.1
+```
+
+Eksekusi pada setiap node di subnet ini:
+```bash
+chmod +x /root/script.sh
+bash /root/script.sh
+```
+
+> ### Revisi — skema IP final
+>
+> Gateway: `10.92.16.1`
+>
+> Pakai blok ini sebagai pengganti script di atas. Baris `flush`
+> menghapus alamat skema lama, karena `replace` hanya menimpa
+> alamat dengan prefix yang sama persis.
+
+#### Node: Lain
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.16.2/26 dev eth0
+ip route replace default via 10.92.16.1
+```
+
+#### Node: Mika
+
+```bash
+nano /root/script.sh
+```
+
+```bash
+#!/bin/bash
+ip addr flush dev eth0
+ip route flush table main 2>/dev/null
+ip addr replace 10.92.16.3/26 dev eth0
+ip route replace default via 10.92.16.1
 ```
 
 Eksekusi pada setiap node di subnet ini:
