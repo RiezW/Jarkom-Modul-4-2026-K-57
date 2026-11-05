@@ -224,6 +224,8 @@ Pada bagian kedua, topologi **The Wired** yang sama (13 router, 13 switch `2960-
 
 ![Topologi Final VLSM di Cisco Packet Tracer](Assets/CPT/cpt-topologi-final-bernama.png)
 
+![Pembagian subnet dan alamat IP VLSM](Assets/CPT/pembagian-ip-vlsm.png)
+
 Dalam metode VLSM, seluruh 25 subnet diurutkan dari kebutuhan alamat terbesar ke terkecil, lalu dialokasikan secara berurutan dari atas ke bawah tanpa celah (*zero fragmentation*). Jumlah IP yang dibutuhkan pada tiap subnet mencakup seluruh host ditambah antarmuka router pada subnet tersebut, kemudian ditambah 2 alamat (*Network ID* dan *Broadcast*) dan dibulatkan ke pangkat dua terkecil yang mencukupi:
 
 | Urutan Alokasi | Subnet | Segmen / Lokasi | Kebutuhan IP | Ukuran Blok (`>= IP + 2`) | Prefix | Network ID | Netmask | Broadcast | Range IP Usable | Gateway / Endpoint | Host pada LAN |
